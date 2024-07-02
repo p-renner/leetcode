@@ -8,3 +8,28 @@ export class TreeNode {
 		this.right = right === undefined ? null : right;
 	}
 }
+
+export function treeFromArr(arr: Array<number | null>): TreeNode | null {
+	if (arr.length === 0) return null;
+	const root = new TreeNode(arr[0]!);
+	const queue = [root];
+	let i = 1;
+	while (i < arr.length) {
+		const current = queue.shift()!;
+		const left = arr[i++];
+		if (left !== null) {
+			current.left = new TreeNode(left);
+			queue.push(current.left);
+		}
+
+		const right = arr[i++];
+		if (right && right !== null) {
+			current.right = new TreeNode(right);
+			queue.push(current.right);
+		}
+	}
+
+	return root;
+}
+
+console.log(treeFromArr([1, 2, 3, null, 4, 5]));
