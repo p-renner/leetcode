@@ -1,16 +1,26 @@
+import { MinPriorityQueue } from '@datastructures-js/priority-queue';
+
 class KthLargest {
-	nums: number[];
+	heap: MinPriorityQueue<number>;
 	k: number;
 
 	constructor(k: number, nums: number[]) {
-		this.nums = nums.sort((a, b) => b - a).slice(0, k);
+		this.heap = new MinPriorityQueue();
 		this.k = k;
+
+		for (const num of nums) {
+			this.add(num);
+		}
 	}
 
 	add(val: number): number {
-		this.nums.push(val);
-		this.nums = this.nums.sort((a, b) => b - a).slice(0, this.k);
-		return this.nums[this.nums.length - 1];
+		if (this.heap.size() < this.k || this.heap.front().element < val) {
+			this.heap.enqueue(val);
+			if (this.heap.size() > this.k) {
+				this.heap.dequeue();
+			}
+		}
+		return this.heap.front().element;
 	}
 }
 
