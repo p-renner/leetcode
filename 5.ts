@@ -1,38 +1,20 @@
 function longestPalindrome(s: string): string {
-	if (s.length <= 1) {
-		return s;
+	let queue = Array.from({ length: s.length }, (_, i) => [i, i]);
+
+	for (let i = 1; i < s.length; i++) {
+		if (s[i] == s[i - 1]) {
+			queue.unshift([i - 1, i]);
+		}
 	}
 
 	let longest = s[0];
 
-	for (let i = 0; i < s.length; i++) {
-		let offset = Math.ceil(longest.length / 2);
-
-		while (i - offset >= 0 && i + offset < s.length) {
-			const curr = s.substring(i - offset, i + offset + 1);
-			if (!isPalindrome(curr)) {
-				break;
-			}
-			longest = curr.length > longest.length ? curr : longest;
-			offset++;
-		}
-
-		offset = Math.ceil(longest.length / 2) - 1;
-		while (i - offset >= 0 && i + offset + 1 < s.length) {
-			const curr = s.substring(i - offset, i + offset + 2);
-			if (!isPalindrome(curr)) {
-				break;
-			}
-			longest = curr.length > longest.length ? curr : longest;
-			offset++;
-		}
+	while (queue.length > 0) {
+		longest = s.slice(queue[0][0], queue[0][1] + 1);
+		queue = queue.filter(([i, j]) => i - 1 >= 0 && s[i - 1] == s[j + 1]).map(([i, j]) => [i - 1, j + 1]);
 	}
 
 	return longest;
-}
-
-function isPalindrome(s: string): boolean {
-	return s == s.split('').reverse().join('');
 }
 
 test('longestPalindrome', () => {
