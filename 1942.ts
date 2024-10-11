@@ -1,36 +1,13 @@
 function smallestChair(times: number[][], targetFriend: number): number {
-	const sorted = times.map(([arrival, leaving], i) => [i, arrival, leaving]).sort((a, b) => a[1] - b[1]);
-	const last = [...sorted].reverse().find((time) => time[0] == targetFriend);
-
-	const chairs: Array<[number, number]> = [];
+	const last = times[targetFriend];
+	const sorted = times.sort((a, b) => a[0] - b[0]).slice(0, times.indexOf(last));
+	const chairs = new Array(times.length).fill(0);
 
 	for (const event of sorted) {
-		let found = false;
-
-		for (let i = 0; i < chairs.length; i++) {
-			if (event[1] < chairs[i][0]) {
-				continue;
-			}
-
-			if (event == last) {
-				return i;
-			}
-
-			chairs[i] = [event[2], event[0]];
-			found = true;
-			break;
-		}
-
-		if (!found) {
-			if (event == last) {
-				return chairs.length;
-			}
-
-			chairs.push([event[2], event[0]]);
-		}
+		chairs[chairs.findIndex((chair) => chair <= event[0])] = event[1];
 	}
 
-	return 0;
+	return chairs.findIndex((chair) => chair <= last[0]);
 }
 
 test('smallestChair', () => {
