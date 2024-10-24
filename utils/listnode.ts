@@ -16,3 +16,20 @@ export function listFromArr(arr: number[]): ListNode {
 	}
 	return head.next!;
 }
+
+export function arrFromList(head: ListNode): number[] {
+	const seen = new Set<ListNode>();
+
+	let curr = head;
+	while (curr) {
+		if (seen.has(curr)) {
+			seen.add(new ListNode(curr.val));
+			break;
+		}
+
+		seen.add(curr);
+		curr = curr.next;
+	}
+
+	return Array.from(seen).map((node) => node.val);
+}

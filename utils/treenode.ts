@@ -31,5 +31,3 @@ export function treeFromArr(arr: Array<number | null>): TreeNode | null {
 
 	return root;
 }
-
-console.log(treeFromArr([1, 2, 3, null, 4, 5]));
