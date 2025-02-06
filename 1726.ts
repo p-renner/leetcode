@@ -8,7 +8,18 @@ function tupleSameProduct(nums: number[]): number {
 		}
 	}
 
-	return [...freq.values()].reduce((acc, f) => acc + 4 * f * (f - 1), 0);
+	const permutations = new Map<number, number>();
+	let res = 0;
+
+	for (const f of freq.values()) {
+		if (!permutations.has(f)) {
+			permutations.set(f, 4 * f * (f - 1));
+		}
+
+		res += permutations.get(f);
+	}
+
+	return res;
 }
 
 test('tupleSameProduct', () => {
