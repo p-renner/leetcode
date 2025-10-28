@@ -1,42 +1,28 @@
 function countValidSelections(nums: number[]): number {
+	let sum = nums.reduce((acc, curr) => acc + curr, 0);
+	let prefix = 0;
 	let res = 0;
 
-	for (let i = 0; i < nums.length; i++) {
-		if (nums[i] == 0) {
-			if (simulate([...nums], i, 1)) {
-				res++;
-			}
+	for (const num of nums) {
+		if (num != 0) {
+			prefix += num;
+			continue;
+		}
 
-			if (simulate([...nums], i, -1)) {
-				res++;
-			}
+		const postfix = sum - prefix;
+		if (postfix == prefix) {
+			res += 2;
+		} else if (postfix + 1 == prefix || postfix == prefix + 1) {
+			res += 1;
+		} else if (prefix + 1 > postfix) {
+			break;
 		}
 	}
 
 	return res;
-
-	function simulate(nums: number[], index: number, dir: number): boolean {
-		while (index < nums.length && index >= 0) {
-			if (nums[index] == 0) {
-				index += dir;
-				continue;
-			}
-
-			nums[index]--;
-			dir *= -1;
-			index += dir;
-		}
-
-		for (let i = 0; i < nums.length; i++) {
-			if (nums[i] != 0) {
-				return false;
-			}
-		}
-
-		return true;
-	}
 }
 
 test('countValidSelections', () => {
 	expect(countValidSelections([1, 0, 2, 0, 3])).toBe(2);
+	expect(countValidSelections([2, 3, 4, 0, 4, 1, 0])).toBe(0);
 });
