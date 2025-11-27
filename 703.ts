@@ -14,13 +14,13 @@ class KthLargest {
 	}
 
 	add(val: number): number {
-		if (this.heap.size() < this.k || this.heap.front().element < val) {
+		if (this.heap.size() < this.k || this.heap.front() < val) {
 			this.heap.enqueue(val);
 			if (this.heap.size() > this.k) {
 				this.heap.dequeue();
 			}
 		}
-		return this.heap.front().element;
+		return this.heap.front();
 	}
 }
 
