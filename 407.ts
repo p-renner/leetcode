@@ -9,7 +9,7 @@ interface Point {
 function trapRainWater(heightMap: number[][]): number {
 	const n = heightMap.length;
 	const m = heightMap[0].length;
-	const pq = new MinPriorityQueue({ priority: (a: Point) => a.h });
+	const pq = new MinPriorityQueue<Point>((a: Point) => a.h);
 
 	const visited = Array.from({ length: n }, () => Array(m).fill(false));
 	const dirs = [
@@ -36,7 +36,7 @@ function trapRainWater(heightMap: number[][]): number {
 	let res = 0;
 
 	while (!pq.isEmpty()) {
-		const point = pq.dequeue().element;
+		const point = pq.dequeue();
 		for (const dir of dirs) {
 			const dx = point.x + dir[0];
 			const dy = point.y + dir[1];
