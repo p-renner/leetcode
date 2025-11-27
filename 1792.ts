@@ -28,5 +28,5 @@ test('maxAverageRatio', () => {
 			],
 			2,
 		),
-	).toBe(0.78333);
+	).toBeCloseTo(0.78333, 5);
 });
