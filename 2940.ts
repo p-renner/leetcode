@@ -24,13 +24,11 @@ function leftmostBuildingQueries(heights: number[], queries: number[][]): number
 		});
 	}
 
-	const pq = new MinPriorityQueue({
-		priority: (item) => item.height,
-	});
+	const pq = new MinPriorityQueue<{ height: number; i: number }>((item) => item.height);
 
 	for (let j = 0; j < heights.length; j++) {
-		while (!pq.isEmpty() && pq.front().element.height < heights[j]) {
-			ans[pq.dequeue().element.i] = j;
+		while (!pq.isEmpty() && pq.front().height < heights[j]) {
+			ans[pq.dequeue().i] = j;
 		}
 
 		for (const r of remain[j]) {
