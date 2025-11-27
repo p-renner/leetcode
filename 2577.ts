@@ -22,10 +22,10 @@ function minimumTime(grid: number[][]): number {
 	minTime[0][0] = 0;
 
 	const pq = new MinPriorityQueue<number[]>();
-	pq.enqueue([minTime[0][0], 0, 0], minTime[0][0]);
+	pq.enqueue([minTime[0][0], 0, 0]);
 
 	while (pq.size() > 0) {
-		const [time, row, col] = pq.dequeue().element;
+		const [time, row, col] = pq.dequeue();
 
 		if (row === m - 1 && col === n - 1) {
 			return time;
@@ -40,7 +40,7 @@ function minimumTime(grid: number[][]): number {
 
 				if (newTime < minTime[r][c]) {
 					minTime[r][c] = newTime;
-					pq.enqueue([newTime, r, c], newTime);
+					pq.enqueue([newTime, r, c]);
 				}
 			}
 		}
