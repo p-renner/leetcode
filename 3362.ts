@@ -12,9 +12,9 @@ function maxRemoval(nums: number[], queries: number[][]): number {
 			heap.enqueue(queries[j][1]);
 			j++;
 		}
-		while (operations < nums[i] && !heap.isEmpty() && heap.front().element >= i) {
+		while (operations < nums[i] && !heap.isEmpty() && heap.front() >= i) {
 			operations += 1;
-			deltaArray[heap.dequeue().element + 1] -= 1;
+			deltaArray[heap.dequeue() + 1] -= 1;
 		}
 		if (operations < nums[i]) {
 			return -1;
