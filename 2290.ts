@@ -19,10 +19,10 @@ function minimumObstacles(grid: number[][]): number {
 	minObstacles[0][0] = grid[0][0];
 
 	const pq = new MinPriorityQueue<number[]>();
-	pq.enqueue([minObstacles[0][0], 0, 0], minObstacles[0][0]);
+	pq.enqueue([minObstacles[0][0], 0, 0]);
 
 	while (pq.size() > 0) {
-		const [obstacles, row, col] = pq.dequeue().element;
+		const [obstacles, row, col] = pq.dequeue();
 
 		if (row === m - 1 && col === n - 1) {
 			return obstacles;
@@ -37,7 +37,7 @@ function minimumObstacles(grid: number[][]): number {
 
 				if (newObstacles < minObstacles[newRow][newCol]) {
 					minObstacles[newRow][newCol] = newObstacles;
-					pq.enqueue([newObstacles, newRow, newCol], newObstacles);
+					pq.enqueue([newObstacles, newRow, newCol]);
 				}
 			}
 		}
