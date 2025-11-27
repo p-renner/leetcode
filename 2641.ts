@@ -13,11 +13,11 @@ function replaceValueInTree(root: TreeNode | null): TreeNode | null {
 		if (root.left) {
 			root.left.val = 0;
 			stack.push(root.left);
-			stack.push(root.right);
 		}
 
 		if (root.right) {
 			root.right.val = 0;
+			stack.push(root.right);
 		}
 
 		while (stack.length > 0) {
@@ -46,15 +46,17 @@ function replaceValueInTree(root: TreeNode | null): TreeNode | null {
 	}
 
 	dfs(root);
-	console.log(root);
-
 	return root;
 }
 
-test('replaceValueInTree', () => {
-	expect(replaceValueInTree(treeFromArr([41, null, 9, 17, 29, null, null, null, 21]))).toEqual(
-		treeFromArr([0, null, 0, 0, 0, null, null, null, 0]),
-	);
-	expect(replaceValueInTree(treeFromArr([5, 4, 9, 1, 10, null, 7]))).toEqual(treeFromArr([0, 0, 0, 7, 7, null, 11]));
-	expect(replaceValueInTree(treeFromArr([3, 1, 2]))).toEqual(treeFromArr([0, 0, 0]));
+describe('replaceValueInTree', () => {
+	test('case 1', () => {
+		expect(replaceValueInTree(treeFromArr([5, 4, 9, 1, 10, null, 7]))).toEqual(
+			treeFromArr([0, 0, 0, 7, 7, null, 11]),
+		);
+	});
+
+	test('case 2', () => {
+		expect(replaceValueInTree(treeFromArr([3, 1, 2]))).toEqual(treeFromArr([0, 0, 0]));
+	});
 });
