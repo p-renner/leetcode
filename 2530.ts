@@ -10,8 +10,8 @@ function maxKelements(nums: number[], k: number): number {
 
 	for (let i = 0; i < k; i++) {
 		const max = pq.dequeue();
-		score += max.element;
-		pq.enqueue(Math.ceil(max.element / 3));
+		score += max;
+		pq.enqueue(Math.ceil(max / 3));
 	}
 
 	return score;
