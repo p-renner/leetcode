@@ -23,7 +23,7 @@ export function treeFromArr(arr: Array<number | null>): TreeNode | null {
 		}
 
 		const right = arr[i++];
-		if (right && right !== null) {
+		if (right !== null) {
 			current.right = new TreeNode(right);
 			queue.push(current.right);
 		}
