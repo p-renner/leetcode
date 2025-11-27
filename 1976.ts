@@ -9,16 +9,16 @@ function countPaths(n: number, roads: number[][]): number {
 		graph[v].push([u, w]);
 	}
 
-	const minHeap = new MinPriorityQueue<number[]>({ priority: (x) => x[1] });
+	const minHeap = new MinPriorityQueue<number[]>((x: number[]) => x[1]);
 	const shortestTime = new Array(n).fill(Infinity);
 	const pathCount = new Array(n).fill(0);
 
-	minHeap.enqueue([0, 0], 0);
+	minHeap.enqueue([0, 0]);
 	shortestTime[0] = 0;
 	pathCount[0] = 1;
 
 	while (!minHeap.isEmpty()) {
-		const [u, time] = minHeap.dequeue().element;
+		const [u, time] = minHeap.dequeue();
 
 		if (time > shortestTime[u]) {
 			continue;
