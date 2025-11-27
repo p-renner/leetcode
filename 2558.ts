@@ -3,16 +3,16 @@ import { MaxPriorityQueue } from '@datastructures-js/priority-queue';
 function pickGifts(gifts: number[], k: number): number {
 	const maxHeap = new MaxPriorityQueue<number>();
 	for (let gift of gifts) {
-		maxHeap.enqueue(gift, gift);
+		maxHeap.enqueue(gift);
 	}
 
 	for (let i = 0; i < k; i++) {
-		const maxGifts = maxHeap.dequeue().element;
+		const maxGifts = maxHeap.dequeue();
 		const root = Math.floor(Math.sqrt(maxGifts));
 		maxHeap.enqueue(root);
 	}
 
-	return maxHeap.toArray().reduce((acc, curr) => acc + curr.element, 0);
+	return maxHeap.toArray().reduce((acc, curr) => acc + curr, 0);
 }
 
 test('pickGifts', () => {
