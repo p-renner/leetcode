@@ -16,3 +16,21 @@ function hasSameDigits(s: string): boolean {
 
 	return nums[0] == nums[1];
 }
+
+describe('hasSameDigits', () => {
+	test('case 1', () => {
+		expect(hasSameDigits('3902')).toBe(true);
+	});
+
+	test('case 2', () => {
+		expect(hasSameDigits('34789')).toBe(false);
+	});
+
+	test('case 3', () => {
+		expect(hasSameDigits('0000')).toBe(true);
+	});
+
+	test('case 4', () => {
+		expect(hasSameDigits('1212')).toBe(true);
+	});
+});
