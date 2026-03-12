@@ -29,9 +29,24 @@ function numberOfStableArrays(zero: number, one: number, limit: number): number 
 	return Number((dp[zero][one][0] + dp[zero][one][1]) % MOD);
 }
 
-test('numberOfStableArrays', () => {
-	expect(numberOfStableArrays(1, 1, 2)).toBe(2);
-	expect(numberOfStableArrays(1, 2, 1)).toBe(1);
-	expect(numberOfStableArrays(3, 3, 2)).toBe(14);
-	expect(numberOfStableArrays(2, 2, 1)).toBe(2);
+describe('numberOfStableArrays', () => {
+	test('case 1', () => {
+		expect(numberOfStableArrays(1, 1, 2)).toBe(2);
+	});
+
+	test('case 2', () => {
+		expect(numberOfStableArrays(1, 2, 1)).toBe(1);
+	});
+
+	test('case 3', () => {
+		expect(numberOfStableArrays(3, 3, 2)).toBe(14);
+	});
+
+	test('case 4', () => {
+		expect(numberOfStableArrays(2, 2, 1)).toBe(2);
+	});
+
+	test('case 5', () => {
+		expect(numberOfStableArrays(1000, 1000, 1000)).toBe(72475738);
+	});
 });
