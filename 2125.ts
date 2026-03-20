@@ -9,7 +9,11 @@ function numberOfBeams(bank: string[]): number {
 	return res;
 }
 
-test('numberOfBeams', () => {
-	expect(numberOfBeams(['011001', '000000', '010100', '001000'])).toBe(8);
-	expect(numberOfBeams(['000', '111', '000'])).toBe(0);
+describe('numberOfBeams', () => {
+	test('case 1', () => {
+		expect(numberOfBeams(['011001', '000000', '010100', '001000'])).toBe(8);
+	});
+	test('case 2', () => {
+		expect(numberOfBeams(['000', '111', '000'])).toBe(0);
+	});
 });
