@@ -3,11 +3,11 @@ function areSimilar(mat: number[][], k: number): boolean {
 	const n = mat[0].length;
 
 	for (let i = 0; i < m; i++) {
-		let dir = i % 2 == 0 ? 1 : -1;
-		let add = dir * k;
+		const mod = k % n;
+		const add = i % 2 === 0 ? mod : n - mod;
 
 		for (let j = 0; j < n; j++) {
-			if (mat[i][j] != mat[i][(j + (n + (add % n))) % n]) {
+			if (mat[i][j] != mat[i][(j + add) % n]) {
 				return false;
 			}
 		}
